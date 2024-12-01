@@ -65,7 +65,6 @@ export const RegistrationForm = () => {
       
       setFormData({
         name: '',
-        gender: '',
         birthName: '',
         birthDate: '',
         birthTime: '',
@@ -83,6 +82,7 @@ export const RegistrationForm = () => {
         annualIncome: '',
         otherDetails: '',
         partnerPreference: '',
+        gender: '',
         father: '',
         fathersOccupation: '',
         mother: '',
@@ -380,27 +380,7 @@ export const RegistrationForm = () => {
         />
       </div>
 
-      {/* Photos */}
-      <div className="space-y-6 mb-8">
-        <h2 className="text-2xl font-bold text-orange-800 mb-4">ಫೋಟೋಗಳು (Photos)</h2>
-        
-        <FormField
-          label="ಫೋಟೋ 1"
-          englishLabel="Photo 1"
-          type="file"
-          value={formData.image1}
-          onChange={(value) => updateField('image1', value)}
-          required
-        />
-
-        <FormField
-          label="ಫೋಟೋ 2"
-          englishLabel="Photo 2"
-          type="file"
-          value={formData.image2}
-          onChange={(value) => updateField('image2', value)}
-        />
-      </div>
+    
 
       {/* Submit Button */}
       <div className="mt-8">
