@@ -6,7 +6,6 @@ import { Loader2 } from 'lucide-react';
 export const RegistrationForm = () => {
   const [formData, setFormData] = useState({
     name: '',
-    gender: '',
     birthName: '',
     birthDate: '',
     birthTime: '',
@@ -24,6 +23,7 @@ export const RegistrationForm = () => {
     annualIncome: '',
     otherDetails: '',
     partnerPreference: '',
+    gender: '',
     father: '',
     fathersOccupation: '',
     mother: '',
