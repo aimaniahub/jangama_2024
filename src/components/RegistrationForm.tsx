@@ -1,120 +1,129 @@
-import React, { useState } from 'react';
-import { FormField } from './FormField';
-import toast, { Toaster } from 'react-hot-toast';
-import { Loader2 } from 'lucide-react';
+import React, { useState } from "react";
+import { FormField } from "./FormField";
+import { Loader2 } from "lucide-react";
+import { SuccessMessage } from "./SuccessMessage"; // Import the new component
 
 export const RegistrationForm = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    birthName: '',
-    birthDate: '',
-    birthTime: '',
-    place: '',
-    raashi: '',
-    nakshatra: '',
-    caste: '',
-    subcaste: '',
-    peeta: '',
-    homegod: '',
-    height: '',
-    education: '',
-    occupation: '',
-    maritalStatus: '',
-    annualIncome: '',
-    otherDetails: '',
-    partnerPreference: '',
-    gender: '',
-    father: '',
-    fathersOccupation: '',
-    mother: '',
-    mothersOccupation: '',
-    sisters: '',
-    brothers: '',
-    contact: '',
-    email: '',
-    address: '',
-    image1: '',
-    image2: ''
+    name: "",
+    birthName: "",
+    birthDate: "",
+    birthTime: "",
+    place: "",
+    raashi: "",
+    nakshatra: "",
+    caste: "",
+    subcaste: "",
+    peeta: "",
+    homegod: "",
+    height: "",
+    education: "",
+    occupation: "",
+    maritalStatus: "",
+    annualIncome: "",
+    otherDetails: "",
+    partnerPreference: "",
+    gender: "",
+    father: "",
+    fathersOccupation: "",
+    mother: "",
+    mothersOccupation: "",
+    sisters: "",
+    brothers: "",
+    contact: "",
+    email: "",
+    address: "",
+    image1: "",
+    image2: ""
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
     try {
-      const response = await fetch('https://script.google.com/macros/s/AKfycbwOsNdp_w2JxTKSvCvMRtXg5habw0Y_LmbY_VZvhu5knD5DNIW2L_JgQlXYCkzrj3Yf/exec', {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          data: {
-            ...formData,
-            timestamp: new Date().toISOString(),
-            sheetName: 'Sheet1' // Specify the sheet name
-          }
-        })
-      });
+      const response = await fetch(
+        "https://script.google.com/macros/s/AKfycbwOsNdp_w2JxTKSvCvMRtXg5habw0Y_LmbY_VZvhu5knD5DNIW2L_JgQlXYCkzrj3Yf/exec",
+        {
+          method: "POST",
+          mode: "no-cors",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            data: {
+              ...formData,
+              timestamp: new Date().toISOString(),
+              sheetName: "Sheet1" // Specify the sheet name
+            }
+          })
+        }
+      );
 
-      toast.success('ನಿಮ್ಮ ಮಾಹಿತಿಯನ್ನು ಯಶಸ್ವಿಯಾಗಿ ನೋಂದಾಯಿಸಲಾಗಿದೆ!', {
-        duration: 5000,
-      });
-      
+      setShowSuccess(true); // Show success message
+
       setFormData({
-        name: '',
-        birthName: '',
-        birthDate: '',
-        birthTime: '',
-        place: '',
-        raashi: '',
-        nakshatra: '',
-        caste: '',
-        subcaste: '',
-        peeta: '',
-        homegod: '',
-        height: '',
-        education: '',
-        occupation: '',
-        maritalStatus: '',
-        annualIncome: '',
-        otherDetails: '',
-        partnerPreference: '',
-        gender: '',
-        father: '',
-        fathersOccupation: '',
-        mother: '',
-        mothersOccupation: '',
-        sisters: '',
-        brothers: '',
-        contact: '',
-        email: '',
-        address: '',
-        image1: '',
-        image2: ''
+        name: "",
+        birthName: "",
+        birthDate: "",
+        birthTime: "",
+        place: "",
+        raashi: "",
+        nakshatra: "",
+        caste: "",
+        subcaste: "",
+        peeta: "",
+        homegod: "",
+        height: "",
+        education: "",
+        occupation: "",
+        maritalStatus: "",
+        annualIncome: "",
+        otherDetails: "",
+        partnerPreference: "",
+        gender: "",
+        father: "",
+        fathersOccupation: "",
+        mother: "",
+        mothersOccupation: "",
+        sisters: "",
+        brothers: "",
+        contact: "",
+        email: "",
+        address: "",
+        image1: "",
+        image2: ""
       });
     } catch (error) {
-      toast.error('ದೋಷ ಸಂಭವಿಸಿದೆ. ದಯವಿಟ್ಟು ನಂತರ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.', {
-        duration: 5000,
-      });
-      console.error('Submission error:', error);
+      console.error("Submission error:", error);
     } finally {
       setIsSubmitting(false);
     }
   };
 
   const updateField = (field: string, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+    setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
-  // Rest of the component remains exactly the same
   return (
-    <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow-xl p-8 border-2 border-orange-100">
-      <Toaster position="top-center" />
-      
-      {/* Personal Information */}
+    <div>
+      {showSuccess && (
+        <SuccessMessage
+          message="ನಿಮ್ಮ ಮಾಹಿತಿಯನ್ನು ಯಶಸ್ವಿಯಾಗಿ ನೋಂದಾಯಿಸಲಾಗಿದೆ!"
+          contactNumber="935378****"
+          onClose={() => setShowSuccess(false)} // Close the message
+        />
+      )}
+
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white rounded-lg shadow-xl p-8 border-2 border-orange-100"
+      >
+        {/* Form fields go here */}
+        {/* Personal Information */}
       <div className="space-y-6 mb-8">
         <h2 className="text-2xl font-bold text-orange-800 mb-4">ವೈಯಕ್ತಿಕ ಮಾಹಿತಿ (Personal Information)</h2>
         
@@ -380,29 +389,24 @@ export const RegistrationForm = () => {
         />
       </div>
 
-    
-
-      {/* Submit Button */}
-      <div className="mt-8">
-        <button
-          type="submit"
-          disabled={isSubmitting}
-          className="w-full bg-orange-600 text-white py-4 px-6 rounded-md hover:bg-orange-700 
-          focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 
-          transform transition-all duration-200 hover:scale-[1.02] text-lg font-semibold
-          shadow-lg hover:shadow-xl disabled:opacity-70 disabled:cursor-not-allowed
-          flex items-center justify-center"
-        >
-          {isSubmitting ? (
-            <>
-              <Loader2 className="animate-spin -ml-1 mr-3 h-5 w-5" />
-              ಸಲ್ಲಿಸಲಾಗುತ್ತಿದೆ... (Submitting...)
-            </>
-          ) : (
-            'ನೋಂದಣಿ ಮಾಡಿ (Register)'
-          )}
-        </button>
-      </div>
-    </form>
+        {/* Submit Button */}
+        <div className="mt-8">
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="w-full bg-orange-600 text-white py-4 px-6 rounded-md hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 transform transition-all duration-200 hover:scale-[1.02] text-lg font-semibold shadow-lg hover:shadow-xl disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center"
+          >
+            {isSubmitting ? (
+              <>
+                <Loader2 className="animate-spin -ml-1 mr-3 h-5 w-5" />
+                ಸಲ್ಲಿಸಲಾಗುತ್ತಿದೆ... (Submitting...)
+              </>
+            ) : (
+              "ನೋಂದಣಿ ಮಾಡಿ (Register)"
+            )}
+          </button>
+        </div>
+      </form>
+    </div>
   );
-}
+};
